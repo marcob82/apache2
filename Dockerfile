@@ -37,7 +37,7 @@ RUN a2ensite default-ssl
 RUN a2enmod ssl
 
 #VOLUME /etc/apache2 /etc/ssl /var/log/apache2 /var/www/html
-
+#VLUMES can be persitently mounted. 
 
 EXPOSE 443
 
