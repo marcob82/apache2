@@ -5,7 +5,7 @@ MAINTAINER Marco Busslinger
 
 #### Inspired by the enonicio/apache2 image ####
 
-RUN apt-get update && apt-get install -y apache2
+RUN apt-get update && apt-get install -y apache2 
 
 # let's copy a few of the settings from /etc/init.d/apache2
 ENV APACHE_CONFDIR /etc/apache2
@@ -29,15 +29,15 @@ RUN find "$APACHE_CONFDIR" -type f -exec sed -ri ' \
     s!^(\s*ErrorLog)\s+\S+!\1 /proc/self/fd/2!g; \
 ' '{}' ';'
 
-COPY sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
+#COPY sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
 
 # Enabling ssl
-COPY sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+#COPY sites-available/default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 RUN a2ensite default-ssl
 RUN a2enmod ssl
 
 #VOLUME /etc/apache2 /etc/ssl /var/log/apache2 /var/www/html
-#VLUMES can be persitently mounted. 
+#VOLUMES can be persitently mounted. 
 
 EXPOSE 443
 
